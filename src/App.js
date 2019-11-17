@@ -1,23 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import Lottie from "react-lottie";
+import animationData from "./data.json";
+import "./App.css";
 
 function App() {
+  const [paused, setPaused] = React.useState(false);
+  const [stopped, setStopped] = React.useState(false);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Lottie
+          width={400}
+          height={400}
+          isPaused={paused}
+          isStopped={stopped}
+          speed={1}
+          options={{
+            loop: true,
+            autoplay: true,
+            animationData,
+            rendererSettings: {
+              preserveAspectRatio: "xMidYMid slice"
+            }
+          }}
+        />
+        <div>
+          <button onClick={() => setStopped(!stopped)}>
+            {stopped ? "Start" : "Stop"}
+          </button>
+          <button onClick={() => setPaused(!paused)}>
+            {paused ? "Paused" : "Pause"}
+          </button>
+        </div>
       </header>
     </div>
   );
