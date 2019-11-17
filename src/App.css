@@ -20,3 +20,14 @@
 .App-link {
   color: #09d3ac;
 }
+.button {
+  border: 0;
+  outline: none;
+  background-color: #09d3ac;
+  padding: 1em;
+  font-size: 0.5em;
+  border-radius: 0.4em;
+}
+.button:nth-child(2) {
+  background-color: red;
+}

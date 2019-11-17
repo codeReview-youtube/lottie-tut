@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "./logo.svg";
 import Lottie from "react-lottie";
 import animationData from "./data.json";
 import "./App.css";
@@ -7,6 +6,12 @@ import "./App.css";
 function App() {
   const [paused, setPaused] = React.useState(false);
   const [stopped, setStopped] = React.useState(false);
+  const [direction, setDirection] = React.useState(1);
+  const [speed, setSpeed] = React.useState(1);
+
+  const defaultOptions = {
+    animationData
+  };
 
   return (
     <div className="App">
@@ -17,21 +22,33 @@ function App() {
           isPaused={paused}
           isStopped={stopped}
           speed={1}
-          options={{
-            loop: true,
-            autoplay: true,
-            animationData,
-            rendererSettings: {
-              preserveAspectRatio: "xMidYMid slice"
-            }
-          }}
+          options={defaultOptions}
+          direction={direction}
         />
         <div>
-          <button onClick={() => setStopped(!stopped)}>
+          <span>Speed: 0</span>
+          <input
+            type="range"
+            value={speed}
+            min={"0"}
+            max={"3"}
+            step={"0.5"}
+            onChange={e => setSpeed(e.currentTarget.value)}
+          />
+          <span>{speed}</span>
+        </div>
+        <div>
+          <button onClick={() => setStopped(!stopped)} className="button">
             {stopped ? "Start" : "Stop"}
           </button>
-          <button onClick={() => setPaused(!paused)}>
+          <button onClick={() => setPaused(!paused)} className="button">
             {paused ? "Paused" : "Pause"}
+          </button>
+          <button
+            onClick={() => setDirection(direction * -1)}
+            className="button"
+          >
+            Direction
           </button>
         </div>
       </header>
